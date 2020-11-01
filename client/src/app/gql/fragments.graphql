@@ -1,0 +1,11 @@
+fragment node on node {
+  id
+  title
+  parentId
+  isCompleted
+  children_aggregate {
+    aggregate {
+      count
+    }
+  }
+}

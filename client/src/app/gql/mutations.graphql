@@ -1,0 +1,24 @@
+mutation renameNode($nodeId: Int!, $nodeTitle: String!) {
+  update_node_by_pk(pk_columns: {id: $nodeId}, _set: {title: $nodeTitle}) {
+    ...node
+  }
+}
+
+mutation createNode($parentNodeId: Int!) {
+  insert_node_one(object: {title: "_", parentId: $parentNodeId}) {
+    ...node
+  }
+}
+
+mutation deleteNode($nodeId: Int!) {
+  delete_node_by_pk(id: $nodeId) {
+    id
+  }
+}
+
+mutation setStatus($nodeId: Int!, $value: Boolean) {
+  update_node_by_pk(pk_columns: {id: $nodeId}, _set: {isCompleted: $value}) {
+    ...node
+  }
+}
+

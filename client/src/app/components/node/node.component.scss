@@ -1,0 +1,42 @@
+@import '~@angular/material/theming';
+
+li.node {
+  list-style-type: none;
+  margin: 4px 0 4px 4px;
+  font-family: monospace;
+
+  .node-header{
+    display: flex;
+    background: mat-color($mat-blue-gray, 50);
+    border-radius: 4px;
+    transition-duration: 0.1s;
+    &.active {
+      background: mat-color($mat-blue, A700);
+    }
+    .title, .title-input-container{
+      width: 100%;
+      padding: 4px;
+      margin-left: 4px;
+      line-height: 24px;
+    }
+    .title-input-container{
+      padding: 0;
+      color: mat-color($mat-blue, A700);
+      input{
+        padding: 4px;
+      }
+      .icon {
+        line-height: 20px;
+        padding: 6px;
+      }
+    }
+    .icon {
+      box-sizing: content-box;
+      min-width: 20px;
+      height: 20px;
+      padding: 6px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+}

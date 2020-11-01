@@ -1,0 +1,8 @@
+<mat-card class="m-8">
+  <h2>Apollo Angular</h2>
+  <div *ngIf="nodes$ | async as nodes">
+    <ul class="tree-view" *ngFor="let childNode of nodes">
+      <app-node [node]="childNode"></app-node>
+    </ul>
+  </div>
+</mat-card>

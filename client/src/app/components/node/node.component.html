@@ -1,0 +1,42 @@
+<li class="node" [ngClass]="{'pl-6': node.parentId}">
+  <div class="node-header" [ngClass]="{active: isActive$ | async}" >
+    <mat-icon
+      *ngIf="node.children_aggregate?.aggregate?.count; else gap"
+      class="icon"
+      (click)="handleToggleExpand()"
+    >{{(isExpanded$ | async) ? "expand_more " : "chevron_right"}}</mat-icon>
+    <ng-template #gap><div class="icon"></div></ng-template>
+    <mat-icon class="icon" inline (click)="handleSetStatus()">{{node.isCompleted ? "check_box" : "check_box_outline_blank"}}</mat-icon>
+    <div
+      *ngIf="!isEditable"
+      (click)="isActive ? toggleEditableMode() : handleSelectNode()"
+      class="title">{{node.title}}
+    </div>
+    <div *ngIf="isEditable" class="flex text-gray-700 flex-1 title-input-container">
+      <input
+        #inputElement
+        class="input"
+        (click)="handleSelectNode()"
+        (keyup.enter)="handleSaveTitle()"
+        (keyup.escape)="handleSaveTitle()"
+        (change)="handleInput($event)"
+        [value]="node.title"
+      />
+      <mat-icon class="icon text-white mr-8" inline (click)="handleSaveTitle()">save</mat-icon>
+    </div>
+    <mat-icon class="icon" inline (click)="handleAddNode()">add_box</mat-icon>
+    <mat-icon class="icon" inline (click)="isFullInfo = !isFullInfo">more_horiz</mat-icon>
+  </div>
+  <div class="node-body" *ngIf="isFullInfo">
+    <div><b>URL:</b>http://youtube.com/csadasds</div>
+    <div><b>Type:</b>Video</div>
+    <div><b>Description:</b>Video about something</div>
+  </div>
+  <div *ngIf="nodeChildren$ | async as nodeChildren">
+    <div *ngIf="(isExpanded$ | async)">
+      <ul class="children" *ngFor="let childNode of nodeChildren">
+        <app-node [node]="childNode"></app-node>
+      </ul>
+    </div>
+  </div>
+</li>

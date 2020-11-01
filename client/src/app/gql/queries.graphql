@@ -1,0 +1,24 @@
+query getNode($nodeId: Int!) {
+  node_by_pk(id: $nodeId) {
+    ...node
+  }
+}
+
+query getNodeWithChildren($nodeId: Int!) {
+  node_by_pk(id: $nodeId) {
+    ...node
+    children {
+      ...node
+    }
+  }
+}
+
+
+query getRootNodes {
+  root_node {
+    ...node
+    children {
+      ...node
+    }
+  }
+}

@@ -1,0 +1,607 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"mutation root"
+type mutation_root {
+  "delete data from the table: \"node\""
+  delete_node(
+    "filter the rows which have to be deleted"
+    where: node_bool_exp!
+  ): node_mutation_response
+  "delete single row from the table: \"node\""
+  delete_node_by_pk(id: Int!): node
+  "insert data into the table: \"node\""
+  insert_node(
+    "the rows to be inserted"
+    objects: [node_insert_input!]!,
+    "on conflict condition"
+    on_conflict: node_on_conflict
+  ): node_mutation_response
+  "insert a single row into the table: \"node\""
+  insert_node_one(
+    "the row to be inserted"
+    object: node_insert_input!,
+    "on conflict condition"
+    on_conflict: node_on_conflict
+  ): node
+  "update data of the table: \"node\""
+  update_node(
+    "increments the integer columns with given value of the filtered values"
+    _inc: node_inc_input,
+    "sets the columns of the filtered rows to the given values"
+    _set: node_set_input,
+    "filter the rows which have to be updated"
+    where: node_bool_exp!
+  ): node_mutation_response
+  "update single row of the table: \"node\""
+  update_node_by_pk(
+    "increments the integer columns with given value of the filtered values"
+    _inc: node_inc_input,
+    "sets the columns of the filtered rows to the given values"
+    _set: node_set_input,
+    pk_columns: node_pk_columns_input!
+  ): node
+}
+
+"columns and relationships of \"node\""
+type node {
+  "A computed field, executes function \"children_count\""
+  childCount: bigint
+  "An array relationship"
+  children(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): [node!]!
+  "An aggregated array relationship"
+  children_aggregate(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): node_aggregate!
+  id: Int!
+  isCompleted: Boolean!
+  "An array relationship"
+  parent(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): [node!]!
+  parentId: Int
+  "An aggregated array relationship"
+  parent_aggregate(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): node_aggregate!
+  progress: Float!
+  "A computed field, executes function \"progress_computed\""
+  progressComputed: float8
+  title: String!
+}
+
+"aggregated selection of \"node\""
+type node_aggregate {
+  aggregate: node_aggregate_fields
+  nodes: [node!]!
+}
+
+"aggregate fields of \"node\""
+type node_aggregate_fields {
+  avg: node_avg_fields
+  count(columns: [node_select_column!], distinct: Boolean): Int
+  max: node_max_fields
+  min: node_min_fields
+  stddev: node_stddev_fields
+  stddev_pop: node_stddev_pop_fields
+  stddev_samp: node_stddev_samp_fields
+  sum: node_sum_fields
+  var_pop: node_var_pop_fields
+  var_samp: node_var_samp_fields
+  variance: node_variance_fields
+}
+
+"aggregate avg on columns"
+type node_avg_fields {
+  id: Float
+  parentId: Float
+  progress: Float
+}
+
+"aggregate max on columns"
+type node_max_fields {
+  id: Int
+  parentId: Int
+  progress: Float
+  title: String
+}
+
+"aggregate min on columns"
+type node_min_fields {
+  id: Int
+  parentId: Int
+  progress: Float
+  title: String
+}
+
+"response of any mutation on the table \"node\""
+type node_mutation_response {
+  "number of affected rows by the mutation"
+  affected_rows: Int!
+  "data of the affected rows by the mutation"
+  returning: [node!]!
+}
+
+"aggregate stddev on columns"
+type node_stddev_fields {
+  id: Float
+  parentId: Float
+  progress: Float
+}
+
+"aggregate stddev_pop on columns"
+type node_stddev_pop_fields {
+  id: Float
+  parentId: Float
+  progress: Float
+}
+
+"aggregate stddev_samp on columns"
+type node_stddev_samp_fields {
+  id: Float
+  parentId: Float
+  progress: Float
+}
+
+"aggregate sum on columns"
+type node_sum_fields {
+  id: Int
+  parentId: Int
+  progress: Float
+}
+
+"aggregate var_pop on columns"
+type node_var_pop_fields {
+  id: Float
+  parentId: Float
+  progress: Float
+}
+
+"aggregate var_samp on columns"
+type node_var_samp_fields {
+  id: Float
+  parentId: Float
+  progress: Float
+}
+
+"aggregate variance on columns"
+type node_variance_fields {
+  id: Float
+  parentId: Float
+  progress: Float
+}
+
+"query root"
+type query_root {
+  "fetch data from the table: \"node\""
+  node(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): [node!]!
+  "fetch aggregated fields from the table: \"node\""
+  node_aggregate(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): node_aggregate!
+  "fetch data from the table: \"node\" using primary key columns"
+  node_by_pk(id: Int!): node
+  "execute function \"root_node\" which returns \"node\""
+  root_node(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): [node!]!
+  "execute function \"root_node\" and query aggregates on result of table type \"node\""
+  root_node_aggregate(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): node_aggregate!
+}
+
+"subscription root"
+type subscription_root {
+  "fetch data from the table: \"node\""
+  node(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): [node!]!
+  "fetch aggregated fields from the table: \"node\""
+  node_aggregate(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): node_aggregate!
+  "fetch data from the table: \"node\" using primary key columns"
+  node_by_pk(id: Int!): node
+  "execute function \"root_node\" which returns \"node\""
+  root_node(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): [node!]!
+  "execute function \"root_node\" and query aggregates on result of table type \"node\""
+  root_node_aggregate(
+    "distinct select on columns"
+    distinct_on: [node_select_column!],
+    "limit the number of rows returned"
+    limit: Int,
+    "skip the first n rows. Use only with order_by"
+    offset: Int,
+    "sort the rows by one or more columns"
+    order_by: [node_order_by!],
+    "filter the rows returned"
+    where: node_bool_exp
+  ): node_aggregate!
+}
+
+"unique or primary key constraints on table \"node\""
+enum node_constraint {
+  "unique or primary key constraint"
+  tree_pkey
+}
+
+"select columns of table \"node\""
+enum node_select_column {
+  "column name"
+  id
+  "column name"
+  isCompleted
+  "column name"
+  parentId
+  "column name"
+  progress
+  "column name"
+  title
+}
+
+"update columns of table \"node\""
+enum node_update_column {
+  "column name"
+  id
+  "column name"
+  isCompleted
+  "column name"
+  parentId
+  "column name"
+  progress
+  "column name"
+  title
+}
+
+"column ordering options"
+enum order_by {
+  "in the ascending order, nulls last"
+  asc
+  "in the ascending order, nulls first"
+  asc_nulls_first
+  "in the ascending order, nulls last"
+  asc_nulls_last
+  "in the descending order, nulls first"
+  desc
+  "in the descending order, nulls first"
+  desc_nulls_first
+  "in the descending order, nulls last"
+  desc_nulls_last
+}
+
+"expression to compare columns of type Boolean. All fields are combined with logical 'AND'."
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _is_null: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
+"expression to compare columns of type Float. All fields are combined with logical 'AND'."
+input Float_comparison_exp {
+  _eq: Float
+  _gt: Float
+  _gte: Float
+  _in: [Float!]
+  _is_null: Boolean
+  _lt: Float
+  _lte: Float
+  _neq: Float
+  _nin: [Float!]
+}
+
+"expression to compare columns of type Int. All fields are combined with logical 'AND'."
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+"expression to compare columns of type String. All fields are combined with logical 'AND'."
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String!]
+  _is_null: Boolean
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String!]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
+}
+
+"order by aggregate values of table \"node\""
+input node_aggregate_order_by {
+  avg: node_avg_order_by
+  count: order_by
+  max: node_max_order_by
+  min: node_min_order_by
+  stddev: node_stddev_order_by
+  stddev_pop: node_stddev_pop_order_by
+  stddev_samp: node_stddev_samp_order_by
+  sum: node_sum_order_by
+  var_pop: node_var_pop_order_by
+  var_samp: node_var_samp_order_by
+  variance: node_variance_order_by
+}
+
+"input type for inserting array relation for remote table \"node\""
+input node_arr_rel_insert_input {
+  data: [node_insert_input!]!
+  on_conflict: node_on_conflict
+}
+
+"order by avg() on columns of table \"node\""
+input node_avg_order_by {
+  id: order_by
+  parentId: order_by
+  progress: order_by
+}
+
+"Boolean expression to filter rows from the table \"node\". All fields are combined with a logical 'AND'."
+input node_bool_exp {
+  _and: [node_bool_exp]
+  _not: node_bool_exp
+  _or: [node_bool_exp]
+  children: node_bool_exp
+  id: Int_comparison_exp
+  isCompleted: Boolean_comparison_exp
+  parent: node_bool_exp
+  parentId: Int_comparison_exp
+  progress: Float_comparison_exp
+  title: String_comparison_exp
+}
+
+"input type for incrementing integer column in table \"node\""
+input node_inc_input {
+  id: Int
+  parentId: Int
+  progress: Float
+}
+
+"input type for inserting data into table \"node\""
+input node_insert_input {
+  children: node_arr_rel_insert_input
+  id: Int
+  isCompleted: Boolean
+  parent: node_arr_rel_insert_input
+  parentId: Int
+  progress: Float
+  title: String
+}
+
+"order by max() on columns of table \"node\""
+input node_max_order_by {
+  id: order_by
+  parentId: order_by
+  progress: order_by
+  title: order_by
+}
+
+"order by min() on columns of table \"node\""
+input node_min_order_by {
+  id: order_by
+  parentId: order_by
+  progress: order_by
+  title: order_by
+}
+
+"input type for inserting object relation for remote table \"node\""
+input node_obj_rel_insert_input {
+  data: node_insert_input!
+  on_conflict: node_on_conflict
+}
+
+"on conflict condition type for table \"node\""
+input node_on_conflict {
+  constraint: node_constraint!
+  update_columns: [node_update_column!]!
+  where: node_bool_exp
+}
+
+"ordering options when selecting data from \"node\""
+input node_order_by {
+  children_aggregate: node_aggregate_order_by
+  id: order_by
+  isCompleted: order_by
+  parentId: order_by
+  parent_aggregate: node_aggregate_order_by
+  progress: order_by
+  title: order_by
+}
+
+"primary key columns input for table: \"node\""
+input node_pk_columns_input {
+  id: Int!
+}
+
+"input type for updating data in table \"node\""
+input node_set_input {
+  id: Int
+  isCompleted: Boolean
+  parentId: Int
+  progress: Float
+  title: String
+}
+
+"order by stddev() on columns of table \"node\""
+input node_stddev_order_by {
+  id: order_by
+  parentId: order_by
+  progress: order_by
+}
+
+"order by stddev_pop() on columns of table \"node\""
+input node_stddev_pop_order_by {
+  id: order_by
+  parentId: order_by
+  progress: order_by
+}
+
+"order by stddev_samp() on columns of table \"node\""
+input node_stddev_samp_order_by {
+  id: order_by
+  parentId: order_by
+  progress: order_by
+}
+
+"order by sum() on columns of table \"node\""
+input node_sum_order_by {
+  id: order_by
+  parentId: order_by
+  progress: order_by
+}
+
+"order by var_pop() on columns of table \"node\""
+input node_var_pop_order_by {
+  id: order_by
+  parentId: order_by
+  progress: order_by
+}
+
+"order by var_samp() on columns of table \"node\""
+input node_var_samp_order_by {
+  id: order_by
+  parentId: order_by
+  progress: order_by
+}
+
+"order by variance() on columns of table \"node\""
+input node_variance_order_by {
+  id: order_by
+  parentId: order_by
+  progress: order_by
+}
+
+
+scalar bigint
+
+scalar float8
